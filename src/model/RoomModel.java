@@ -10,7 +10,7 @@ public class RoomModel {
     private double cancellationFee=50.0;
     private boolean isBooked ;
 
-    RoomModel(RoomBuilder roomBuilder) {
+     private RoomModel(RoomBuilder roomBuilder) {
         this.roomNumber = roomBuilder.roomNumber;
         this.type = roomBuilder.type;
         this.price = roomBuilder.price;
@@ -23,7 +23,7 @@ public class RoomModel {
         private RoomType type;
         private double price;
         private double cancellationFee;
-        private boolean isBooked = false;
+        private boolean isBooked ;
 
         public RoomBuilder setType(RoomType roomType) {
             this.type = roomType;
@@ -31,7 +31,7 @@ public class RoomModel {
         }
 
         public RoomBuilder setNumber(String roomNumber) {
-            Pattern pattern = Pattern.compile("^[APD]{1}[1-8]{3}$");
+            Pattern pattern = Pattern.compile("^[APD]{1}[0-9]{3}$");
             Matcher matcher = pattern.matcher(roomNumber);
             if (matcher.matches()) {
                 this.roomNumber = roomNumber;

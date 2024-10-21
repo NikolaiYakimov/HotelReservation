@@ -4,12 +4,13 @@ import model.RoomManager;
 import model.RoomModel;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Administrator extends Person{
     private RoomManager roomManager;
 
     public Administrator(String username, String password) {
-        super(username, password);
+        super(username, password,"ADMIN");
         roomManager=new RoomManager();
     }
 
@@ -21,20 +22,23 @@ public class Administrator extends Person{
                 System.out.println(room);
             }
         }
-
     }
-//    public void viewTotalIncomePerDay(){
-//        double totalIncome=0;
-//        for(RoomModel room:roomManager.getAllRooms()){
-//            if(room.isBooked()){
-//                totalIncome+=room.getPrice();
-//            }
-//        }
-//        System.out.println("Total income:$ "+totalIncome);
-//    }
 
-    public void addRoom(RoomModel newRoom) {
-        roomManager.addRoom(newRoom);
+    public void displayAvailableRooms(){
+        roomManager.displayAvailableRooms();
+    }
+    public void viewTotalIncomePerDay(){
+        double totalIncome=0;
+        for(RoomModel room:roomManager.getAllRooms()){
+            if(room.isBooked()){
+                totalIncome+=room.getPrice();
+            }
+        }
+        System.out.println("Total income:$ "+totalIncome);
+    }
+
+    public void addRoom(Scanner scanner) {
+        roomManager.addRoom(scanner);
         roomManager.saveToFile();
         System.out.println("Room added successfully!");
     }

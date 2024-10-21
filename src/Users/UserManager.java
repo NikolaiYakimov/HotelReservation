@@ -14,7 +14,8 @@ public class UserManager implements StoreableAndLoadable {
         loadFromFile();
     }
 
-    private void registerUser(String username, String password, String adminAccess) {
+    public void registerUser(String username, String password, String adminAccess) {
+
         if(adminAccess.equals("$admin$")){
             users.add(new Administrator(username,password));
         }else{
@@ -35,9 +36,10 @@ public class UserManager implements StoreableAndLoadable {
     //Login functionality
     public Person logIn(String username,String password){
         for(Person person:users){
-            if(person.getUsername().equals(username)&&person.getPassword().equals(password))
+            if(person.getUsername().equals(username)&&person.getPassword().equals(password)) {
                 System.out.println("Log in successfully!");
-            return person;
+                return person;
+            }
         }
         System.out.println("We dont have such account!");
         return null;
@@ -68,11 +70,11 @@ public class UserManager implements StoreableAndLoadable {
                 if (role.equals("ADMIN")) {
                     users.add(new Administrator(username, password));
                 } else {
-                    String[] bookings = parts[3].split(";");
+//                    String[] bookings = parts[3].split(";");
                     users.add(new User(username, password));
-                    for (String book : bookings) {
-                        findByUsername(username).getBookHistory().add(book);
-                    }
+//                    for (String book : bookings) {
+//                        findByUsername(username).getBookHistory().add(book);
+//                    }
                 }
             }
             System.out.println("Load from the file");
@@ -86,9 +88,9 @@ public class UserManager implements StoreableAndLoadable {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Person person : users) {
                 String line = person.getUsername() + "," + person.getPassword() + "," + person.getRole();
-                if (person instanceof User user && !user.getBookHistory().isEmpty()) {
-                    line += "," + String.join(";", user.getBookHistory());
-                }
+//                if (person instanceof User user && !user.getBookHistory().isEmpty()) {
+//                    line += "," + String.join(";", user.getBookHistory());
+//                }
                 writer.write(line);
                 writer.newLine();
 
@@ -99,6 +101,7 @@ public class UserManager implements StoreableAndLoadable {
         }
 
     }
+
 
 
 }

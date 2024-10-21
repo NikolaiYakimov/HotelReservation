@@ -6,9 +6,10 @@ import java.util.regex.Pattern;
 public abstract class Person {
     private String username;
     private String password;
+    private String role;
     private Pattern passPattern=Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
 
-    public Person(String username, String password) {
+    public Person(String username, String password,String role) {
         if(username == null|| username.isEmpty()) {
             throw new IllegalArgumentException("Username cannot be null or empty!");
         }
@@ -18,8 +19,9 @@ public abstract class Person {
         if(matcher.matches()) {
             this.username = username;
             this.password = password;
+            this.role=role;
         }else {
-            throw new IllegalArgumentException("Password must be at least 8 characters long, " +
+            System.out.println("Password must be at least 8 characters long, " +
                     "contain at least one digit, one lowercase letter, one uppercase letter, " +
                     "one special character, and must not contain whitespace.");
         }

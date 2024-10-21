@@ -8,11 +8,13 @@ import java.util.List;
 
 public class User extends Person {
     private List<String> bookHistory;
+//    RoomManager roomManager;
 
 
     public User(String username, String password) {
-        super(username, password);
+        super(username, password,"USER");
         this.bookHistory = new ArrayList<>();
+//        roomManager=new RoomManager();
 
     }
 
@@ -21,14 +23,26 @@ public class User extends Person {
         roomManager.displayAvailableRooms();
     }
 
-    public void bookRoom(RoomManager roomManager, String roomNumber) {
-        for (RoomModel room : roomManager.getAvailableRooms()) {
-            if (!room.isBooked()) {
-                String bookingDate = java.time.LocalDate.now().toString();
-                room.bookRoom();
-                bookHistory.add(room.getRoomNumber() + "," + bookingDate);
+    public void cancelBooking(RoomManager roomManager,String roomNumber){
+        for(RoomModel room:roomManager.getAllRooms()){
+            if(room.getRoomNumber().equalsIgnoreCase(roomNumber)){
+                roomManager.cancelBooking(room);
             }
         }
+        roomManager.saveToFile();
+    }
+
+    public void bookRoom(RoomManager roomManager, String roomNumber) {
+        for (RoomModel room : roomManager.getAllRooms()) {
+            if (room.getRoomNumber().equals(roomNumber)&&!room.isBooked()) {
+                String bookingDate = java.time.LocalDate.now().toString();
+                room.bookRoom();
+                roomManager.saveToFile();
+                bookHistory.add(room.getRoomNumber() + "," + bookingDate);
+                return;
+            }
+        }
+
     }
 
     // View booking history
