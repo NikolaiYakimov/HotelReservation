@@ -8,9 +8,9 @@ import java.util.List;
 public class Administrator extends Person{
     private RoomManager roomManager;
 
-    public Administrator(String username, String password,RoomManager roomManager) {
+    public Administrator(String username, String password) {
         super(username, password);
-        this.roomManager=roomManager;
+        roomManager=new RoomManager();
     }
 
     public void viewAllBookings(){
