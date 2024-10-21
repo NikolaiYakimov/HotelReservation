@@ -2,7 +2,6 @@ package Users;
 
 import model.RoomManager;
 import model.RoomModel;
-import model.RoomType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +22,11 @@ public class User extends Person {
     }
 
     public void bookRoom(RoomManager roomManager, String roomNumber) {
-        for (RoomModel room:roomManager.getAvailableRooms())
-        {
-            if(!room.isBooked()){
+        for (RoomModel room : roomManager.getAvailableRooms()) {
+            if (!room.isBooked()) {
+                String bookingDate = java.time.LocalDate.now().toString();
                 room.bookRoom();
-                bookHistory.add(room.toString());
+                bookHistory.add(room.getRoomNumber() + "," + bookingDate);
             }
         }
     }
@@ -43,6 +42,10 @@ public class User extends Person {
             }
         }
     }
+    public List<String> getBookHistory(){
+        return bookHistory;
+    }
+
 
     @Override
     public void viewProfile() {
