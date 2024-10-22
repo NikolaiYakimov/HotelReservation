@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User extends Person {
-    private List<String> bookHistory;
+    private List<RoomModel> bookHistory;
 //    RoomManager roomManager;
 
 
@@ -27,6 +27,9 @@ public class User extends Person {
         for(RoomModel room:roomManager.getAllRooms()){
             if(room.getRoomNumber().equalsIgnoreCase(roomNumber)){
                 roomManager.cancelBooking(room);
+                bookHistory.remove(room);
+
+
             }
         }
         roomManager.saveToFile();
@@ -38,7 +41,8 @@ public class User extends Person {
                 String bookingDate = java.time.LocalDate.now().toString();
                 room.bookRoom();
                 roomManager.saveToFile();
-                bookHistory.add(room.getRoomNumber() + "," + bookingDate);
+                bookHistory.add(room);
+                System.out.println("Room " +room.getRoomNumber() +" is booked successfully!");
                 return;
             }
         }
@@ -51,12 +55,12 @@ public class User extends Person {
         if (bookHistory.isEmpty()) {
             System.out.println("No bookings found.");
         } else {
-            for (String booking : bookHistory) {
-                System.out.println(booking);
+            for (RoomModel room : bookHistory) {
+                System.out.println(room);
             }
         }
     }
-    public List<String> getBookHistory(){
+    public List<RoomModel> getBookHistory(){
         return bookHistory;
     }
 
