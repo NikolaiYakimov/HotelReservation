@@ -15,6 +15,7 @@ public class Administrator extends Person{
     }
 
     public void viewAllBookings(){
+
         List<RoomModel> allRoams=roomManager.getAllRooms();
         System.out.println("All bookings");
         for (RoomModel room:allRoams){
@@ -25,7 +26,15 @@ public class Administrator extends Person{
     }
 
     public void displayAvailableRooms(){
+
         roomManager.displayAvailableRooms();
+    }
+    public void displayAllRooms(){
+        System.out.println("All rooms:");
+        List<RoomModel> rooms=roomManager.getAllRooms();
+        for(RoomModel room:rooms){
+            System.out.println(room);
+        }
     }
     public void viewTotalIncomePerDay(){
         double totalIncome=0;
@@ -40,7 +49,7 @@ public class Administrator extends Person{
     public void addRoom(Scanner scanner) {
         roomManager.addRoom(scanner);
         roomManager.saveToFile();
-        System.out.println("Room added successfully!");
+
     }
 
     public void removeRoom(String roomNumber) {

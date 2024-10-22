@@ -87,10 +87,11 @@ public class Main {
             System.out.println("\nAdmin Menu");
             System.out.println("1. View All Bookings");
             System.out.println("2. View All Rooms");
-            System.out.println("3. View Total Income by today");
-            System.out.println("4. Add Room");
-            System.out.println("5. Remove Room");
-            System.out.println("6. Logout");
+            System.out.println("3. View All Available Rooms");
+            System.out.println("4. View Total Income by today");
+            System.out.println("5. Add Room");
+            System.out.println("6. Remove Room");
+            System.out.println("7. Logout");
             System.out.print("Choose an option: ");
 
             int choice = Integer.parseInt(scanner.nextLine());
@@ -99,18 +100,22 @@ public class Main {
                     currentAdmin.viewAllBookings();
                     break;
                 case 2:
-                    currentAdmin.displayAvailableRooms();
+
+                    currentAdmin.displayAllRooms();
                     break;
                 case 3:
-                    currentAdmin.viewTotalIncomePerDay();
+                    currentAdmin.displayAvailableRooms();
                     break;
                 case 4:
-                    currentAdmin.addRoom(scanner);
+                    currentAdmin.viewTotalIncomePerDay();
                     break;
                 case 5:
-                    removeRoom();
+                    currentAdmin.addRoom(scanner);
                     break;
                 case 6:
+                    removeRoom();
+                    break;
+                case 7:
                     System.out.println("Logged out successfully.");
                     return;
                 default:
