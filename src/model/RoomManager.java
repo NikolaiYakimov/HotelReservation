@@ -87,8 +87,9 @@ public class RoomManager implements StoreableAndLoadable {
         room.bookRoom();
     }
 
-    public void cancelBooking(RoomModel room) {
+    public RoomModel cancelBooking(RoomModel room) {
         room.cancelBooking();
+        return room;
     }
 
     public List<RoomModel> getAllRooms() {

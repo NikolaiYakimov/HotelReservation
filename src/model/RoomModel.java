@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -100,4 +101,18 @@ public class RoomModel {
     public String toString() {
         return roomNumber + " - " + type + " - $" + price + " (Available: " + !isBooked + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        RoomModel room = (RoomModel) obj;
+        return roomNumber.equalsIgnoreCase(room.roomNumber);  // Compare rooms based on room number
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roomNumber.toLowerCase());  // Ensure consistent hashing based on room number
+    }
+
 }

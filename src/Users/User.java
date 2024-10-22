@@ -24,13 +24,24 @@ public class User extends Person {
     }
 
     public void cancelBooking(RoomManager roomManager,String roomNumber){
-        for(RoomModel room:roomManager.getAllRooms()){
-            if(room.getRoomNumber().equalsIgnoreCase(roomNumber)){
+//
+        RoomModel roomToCancel = null;
+        // Find the room to cancel
+        for (RoomModel room : roomManager.getAllRooms()) {
+            if (room.getRoomNumber().equalsIgnoreCase(roomNumber)) {
                 roomManager.cancelBooking(room);
-                bookHistory.remove(room);
-
-
+                roomToCancel = room;
+                break;
             }
+        }
+
+        if (roomToCancel != null) {
+            // Remove the room from bookHistory
+            bookHistory.remove(roomToCancel);  // Will work if equals() is properly overridden
+            System.out.println("Booking for room " + roomNumber + " successfully canceled.");
+            roomManager.saveToFile();
+        } else {
+            System.out.println("Room is not currently booked.");
         }
         roomManager.saveToFile();
     }
