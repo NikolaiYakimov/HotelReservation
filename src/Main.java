@@ -17,8 +17,7 @@ public class Main {
         while (true) {
             System.out.println("1. Register");
             System.out.println("2. Login");
-            System.out.println("3. Admin Login");
-            System.out.println("4. Exit");
+            System.out.println("3. Exit");
             System.out.print("Choose an option: ");
 
             int choice = Integer.parseInt(scanner.nextLine());
@@ -30,9 +29,6 @@ public class Main {
                     login();
                     break;
                 case 3:
-                    adminLogin();
-                    break;
-                case 4:
                     System.out.println("Goodbye!");
                     return;
                 default:
@@ -65,26 +61,18 @@ public class Main {
 
         Person person=userManager.logIn(username,password);
         if(person!=null){
+            if(person instanceof User){
                 currentUser = (User) person;
                 userMenu();
+            } else if (person instanceof Administrator) {
+                currentAdmin=(Administrator) person;
+                adminMenu();
+            }
 
         }else{
             System.out.println("Invalid username or password.");
         }
 
-    }
-
-    private static void adminLogin() {
-        System.out.print("Enter admin username: ");
-        String username = scanner.nextLine();
-        System.out.print("Enter admin password: ");
-        String password = scanner.nextLine();
-        currentAdmin=(Administrator)userManager.logIn(username,password);
-        if (currentAdmin!=null) {
-            adminMenu();
-        } else {
-            System.out.println("Invalid admin credentials.");
-        }
     }
 
 
