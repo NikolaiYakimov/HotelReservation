@@ -10,19 +10,17 @@ public class User extends Person {
     private static long idCounter = 0;
     private  String id;
     private List<RoomModel> bookHistory;
-//    RoomManager roomManager;
 
-
-    public String getId() {
-        return id;
-    }
 
     public User(String username, String password,String id) {
         super(username, password,"USER");
         this.id=id;
         this.bookHistory = new ArrayList<>();
-//        roomManager=new RoomManager();
 
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void viewAvailableRooms(RoomManager roomManager) {
@@ -94,6 +92,6 @@ public class User extends Person {
     public String getRole() {
         return "USER";
     }
-    
+
     //TODO: Make load and save to file for bookHistory, to have all booking for a current user
 }
