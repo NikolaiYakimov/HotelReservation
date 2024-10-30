@@ -93,8 +93,6 @@ public class RoomManager implements StoreableAndLoadable {
     }
 
     public List<RoomModel> getAllRooms() {
-        rooms.clear();
-        loadFromFile();
         return rooms;
     }
 

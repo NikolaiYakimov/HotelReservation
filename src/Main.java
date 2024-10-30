@@ -153,6 +153,8 @@ public class Main {
                     break;
                 case 5:
                     System.out.println("Logged out successfully.");
+                    roomManager.saveToFile();
+                    currentUser.saveBookToFile(roomManager);
                     return;
                 default:
                     System.out.println("Invalid option. Please try again.");

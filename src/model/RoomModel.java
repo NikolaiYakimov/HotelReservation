@@ -115,4 +115,7 @@ public class RoomModel {
         return Objects.hash(roomNumber.toLowerCase());  // Ensure consistent hashing based on room number
     }
 
+    public String getData(){
+         return roomNumber + "," + type + "," + price + "," + isBooked ;
+    }
 }
